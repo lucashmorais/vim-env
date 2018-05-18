@@ -75,11 +75,11 @@ let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
 " Jump to anywhere you want with minimal keystrokes, with just one key binding.
 " `s{char}{label}`
-nmap s <Plug>(easymotion-overwin-f)
+"nmap s <Plug>(easymotion-overwin-f)
 " or
 " `s{char}{char}{label}`
 " Need one more keystroke, but on average, it may be more comfortable.
-"""nmap s <Plug>(easymotion-overwin-f2)
+nmap s <Plug>(easymotion-overwin-f2)
 
 " Turn on case insensitive feature
 let g:EasyMotion_smartcase = 1
@@ -87,3 +87,27 @@ let g:EasyMotion_smartcase = 1
 " JK motions: Line motions
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
+
+" set autochdir
+
+" Enable repmo-vim
+" map a motion and its reverse motion:
+noremap <expr> h repmo#SelfKey('h', 'l')|sunmap h
+noremap <expr> l repmo#SelfKey('l', 'h')|sunmap l
+
+" if you like `:noremap j gj', you can keep that:
+map <expr> j repmo#Key('gj', 'gk')|sunmap j
+map <expr> k repmo#Key('gk', 'gj')|sunmap k
+
+" repeat the last [count]motion or the last zap-key:
+map <expr> ; repmo#LastKey(';')|sunmap ;
+map <expr> , repmo#LastRevKey(',')|sunmap ,
+
+" add these mappings when repeating with `;' or `,':
+noremap <expr> f repmo#ZapKey('f')|sunmap f
+noremap <expr> F repmo#ZapKey('F')|sunmap F
+noremap <expr> t repmo#ZapKey('t')|sunmap t
+noremap <expr> T repmo#ZapKey('T')|sunmap T
+
+" let one toggle relative number with Ctrl+n
+map <C-n> :set relativenumber!<CR>
